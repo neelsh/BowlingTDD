@@ -1,0 +1,32 @@
+{
+  "name": "bowlingtdd",
+  "version": "1.0.0",
+  "description": "Bowling kata",
+  "main": "webpack.config.js",
+  "babel": {
+    "presets": [
+      "react",
+      "es2015"
+    ]
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack-dev-server --content-base dist",
+    "babel": "babel --presets es2015 js/main.js -o build/main.bundle.js",
+    "start": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neelsh/BowlingTDD.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neelsh/BowlingTDD/issues"
+  },
+  "homepage": "https://github.com/neelsh/BowlingTDD#readme"
+}
