@@ -1,15 +1,48 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+const BowlingGame = function() {
+  this.rolls = [];
+  this.currentRoll = 0;
+};
 
-class Main extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Bowling</h1>
-      </div>
-    )
+BowlingGame.prototype.roll = function(pins) {
+  this.rolls[this.currentRoll++] = pins;
+};
+
+BowlingGame.prototype.score = function() {
+  let score = 0;
+  let frameIndex = 0;
+  let self = this;
+
+  function sumOfBallsInFrame() {
+    return self.rolls[frameIndex] + self.rolls[frameIndex + 1];
   }
-}
 
-const app = document.getElementById('app')
-ReactDOM.render(<Main />, app)
+  function isSpare() {
+    return self.rolls[frameIndex] + self.rolls[frameIndex + 1] === 10;
+  }
+
+  function spareBonus() {
+    return self.rolls[frameIndex + 2];
+  }
+
+  function isStrike() {
+    return self.rolls[frameIndex] === 10;
+  }
+
+  function strikeBonus() {
+    return self.rolls[frameIndex + 1] + self.rolls[frameIndex + 2];
+  }
+
+  for (var frame = 0; frame < 10; frame++) {
+    if(isStrike()) {
+      score = score + 10 + strikeBonus();
+      frameIndex = frameIndex + 1;
+    } else if(isSpare()) {
+      score = score + 10 + spareBonus();
+      frameIndex = frameIndex + 2;
+    } else {
+      score = score + sumOfBallsInFrame();
+      frameIndex = frameIndex + 2;
+    }
+  }
+  return score;
+};
